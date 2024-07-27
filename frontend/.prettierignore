@@ -1,0 +1,23 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+
+# Ignore all HTML files
+*.html
+
+# Ignore specific file types
+*.min.js
+*.map
+
+# Ignore environment variable files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
