@@ -10,9 +10,9 @@ export const errorMiddleware = (err, req, res, next) => {
     });
   }
 
-  return res.status(500).json({
+  return res.status(err.statusCode || 500).json({
     success: false,
-    message: 'Internal Server Error',
+    message: err.message || 'Internal Server Error',
     errors: [],
     data: null,
   });
