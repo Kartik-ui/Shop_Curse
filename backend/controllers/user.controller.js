@@ -30,9 +30,24 @@ const createUser = asyncHandler(async (req, res) => {
   if (!newUser)
     throw new ApiError(500, 'Something went wrong while creating user');
 
+  const { accessToken, refreshToken } =
+    await generateAccessAndRefreshTokens(newUser);
+
+  const createdUser = await User.findById(newUser._id).select(
+    '-password -refreshToken'
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+  };
+
   return res
     .status(201)
-    .json(new ApiResponse(201, newUser, 'User created successfully'));
+    .cookie('accessToken', accessToken, options)
+    .cookie('refreshToken', refreshToken, options)
+    .json(new ApiResponse(201, createdUser, 'User created successfully'));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -62,13 +77,7 @@ const loginUser = asyncHandler(async (req, res) => {
     .status(200)
     .cookie('accessToken', accessToken, options)
     .cookie('refreshToken', refreshToken, options)
-    .json(
-      new ApiResponse(
-        200,
-        { user: loggedInUser, accessToken, refreshToken },
-        'User loggedIn successfully'
-      )
-    );
+    .json(new ApiResponse(200, loggedInUser, 'User loggedIn successfully'));
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
