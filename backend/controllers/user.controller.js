@@ -97,7 +97,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
+  const users = await User.find({}).select('-password -refreshToken');
 
   if (!users) throw new ApiError(404, 'No users found');
 
@@ -166,7 +166,6 @@ const getUserById = asyncHandler(async (req, res) => {
 const updateUserById = asyncHandler(async (req, res) => {
   const { userId } = req.params;
   if (!isValidObjectId(userId)) throw new ApiError(400, 'Invalid user id');
-
   const { value, error } = adminUpdateSchema.validate(req.body);
   if (error) throw new ApiError(400, error.details[0].message);
 
