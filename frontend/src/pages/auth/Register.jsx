@@ -115,7 +115,7 @@ const Register = () => {
               Confirm Password
             </label>
             <input
-              type="text"
+              type="password"
               name="confirmPassword"
               id="confirmPassword"
               placeholder="Enter confirm password"

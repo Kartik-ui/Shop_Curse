@@ -24,4 +24,4 @@ const adminUpdateSchema = Joi.object({
   isAdmin: Joi.boolean(),
 }).or('userName', 'email', 'isAdmin');
 
-export { loginSchema, updateSchema, userSchema, adminUpdateSchema };
+export { adminUpdateSchema, loginSchema, updateSchema, userSchema };
