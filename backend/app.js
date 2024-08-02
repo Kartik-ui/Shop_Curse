@@ -18,10 +18,12 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 //route imports
+import categoryRoutes from './routes/category.routes.js';
 import userRoutes from './routes/user.routes.js';
 
 //routes
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/category', categoryRoutes);
 
 app.use(errorMiddleware);
 
