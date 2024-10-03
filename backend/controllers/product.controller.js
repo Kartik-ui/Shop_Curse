@@ -14,9 +14,9 @@ const addProduct = asyncHandler(async (req, res) => {
   const { value, error } = addProductSchema.validate(req.body);
   if (error) throw new ApiError(400, error.details[0].message);
 
-  const { name, description, price, category, quantity, brand } = value;
+  const { name, description, price, category, quantity, brand, stock } = value;
 
-  const imageLocalPath = req.file.path;
+  const imageLocalPath = req.file?.path;
   if (!imageLocalPath) throw new ApiError(400, 'Image is required');
 
   const existingProduct = await Product.findOne({ name });
@@ -32,6 +32,7 @@ const addProduct = asyncHandler(async (req, res) => {
     quantity,
     brand,
     image: imageUrl?.url,
+    countInStock: stock,
   });
 
   return res

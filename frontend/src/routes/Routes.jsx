@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import App from '../App';
 import CategoryList from '../pages/admin/CategoryList';
+import ProductList from '../pages/admin/ProductList';
 import UserList from '../pages/admin/UserList';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<AdminRoutes />}>
         <Route path="userlist" element={<UserList />} />
         <Route path="categorylist" element={<CategoryList />} />
+        <Route path="productlist" element={<ProductList />} />
       </Route>
     </Route>
   )
