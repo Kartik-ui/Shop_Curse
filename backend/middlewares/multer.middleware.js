@@ -1,5 +1,6 @@
 import multer from 'multer';
 import { ApiError } from '../utils/apiError.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -11,12 +12,12 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('images/')) {
+const fileFilter = asyncHandler((req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
     cb(null, true);
   } else {
     cb(new ApiError(400, 'Images only allowed'), false);
   }
-};
+});
 
 export const upload = multer({ storage, fileFilter });

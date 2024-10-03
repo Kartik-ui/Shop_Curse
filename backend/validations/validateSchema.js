@@ -43,6 +43,8 @@ const addProductSchema = Joi.object({
   category: objectId.required(),
   quantity: Joi.number().required(),
   brand: Joi.string().required(),
+  image: Joi.any(),
+  stock: Joi.number().min(1).required(),
 });
 
 const updateProductSchema = Joi.object({
