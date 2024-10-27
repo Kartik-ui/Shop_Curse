@@ -58,7 +58,17 @@ const updateProductSchema = Joi.object({
     if (!value) return helpers.message('Image is not provided');
     return value;
   }),
-}).or('name', 'description', 'price', 'category', 'quantity', 'brand', 'image');
+  countInStock: Joi.number().min(0).required(),
+}).or(
+  'name',
+  'description',
+  'price',
+  'category',
+  'quantity',
+  'brand',
+  'image',
+  'countInStock'
+);
 
 const addProductReviewSchema = Joi.object({
   rating: Joi.number().min(1).max(5).required(),

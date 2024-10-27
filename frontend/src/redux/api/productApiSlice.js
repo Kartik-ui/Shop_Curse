@@ -4,9 +4,8 @@ import { apiSlice } from './apiSlice';
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ keyword, sort }) => ({
+      query: () => ({
         url: `${PRODUCT_URL}`,
-        params: { keyword, sort },
       }),
       keepUnusedDataFor: 5,
       providesTags: ['Product'],
@@ -34,6 +33,9 @@ export const productApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: formData,
       }),
+      invalidatesTags: (result, error, { productId }) => [
+        { type: 'Product', id: productId },
+      ],
     }),
 
     deleteProduct: builder.mutation({
@@ -41,7 +43,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}/${productId}`,
         method: 'DELETE',
       }),
-      providesTags: ['Product'],
+      invalidatesTags: ['Product'],
     }),
 
     createReview: builder.mutation({
@@ -61,5 +63,4 @@ export const {
   useDeleteProductMutation,
   useGetProductByIdQuery,
   useGetProductsQuery,
-  use,
 } = productApiSlice;

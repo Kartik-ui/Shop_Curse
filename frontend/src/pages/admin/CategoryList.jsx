@@ -8,6 +8,7 @@ import {
   useGetCategoriesQuery,
   useUpdateCategoryMutation,
 } from '../../redux/api/categoryApiSlice';
+import AdminMenu from './AdminMenu';
 
 const CategoryList = () => {
   const { data: categories, refetch } = useGetCategoriesQuery();
@@ -52,7 +53,6 @@ const CategoryList = () => {
   };
 
   const handleUpdateCategory = async (e) => {
-    console.log('update clicked');
     e.preventDefault();
     try {
       const res = await updateCategory({
@@ -71,7 +71,7 @@ const CategoryList = () => {
 
   return (
     <section className="ml-[10rem] flex flex-col md:flex-row">
-      {/* <AdminMenu /> */}
+      <AdminMenu />
       <div className="p-3 md:w-3/4">
         <div className="h-12">Manage Categories</div>
         <CategoryForm
