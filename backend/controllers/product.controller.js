@@ -50,6 +50,11 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const oldImageUrl = product.image;
 
+  if (req.body.stock !== undefined && req.body.stock !== null) {
+    req.body.countInStock = req.body.stock;
+    delete req.body.stock;
+  }
+
   if (req.file && req.file.path) {
     req.body.image = req.file.path;
   }

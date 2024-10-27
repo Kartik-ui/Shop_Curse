@@ -2,11 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useGetCategoriesQuery } from '../../redux/api/categoryApiSlice';
-import {
-  useCreateProductMutation,
-  useCreateReviewMutation,
-  useUpdateProductMutation,
-} from '../../redux/api/productApiSlice';
+import { useCreateProductMutation } from '../../redux/api/productApiSlice';
+import AdminMenu from './AdminMenu';
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -54,7 +51,7 @@ const ProductList = () => {
   return (
     <section className="container sm:mx-[0] xl:mx-[9rem]">
       <div className="flex flex-col md:flex-row">
-        {/* AdminMenu */}
+        <AdminMenu />
         <div className="p-3 md:w-3/4">
           <div className="h-12">Create Product</div>
           {imageUrl && (
